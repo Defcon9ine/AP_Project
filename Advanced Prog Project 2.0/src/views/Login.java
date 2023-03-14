@@ -23,6 +23,7 @@ public class Login implements ActionListener{
 	private JFrame frame;
 	private JTextField IDtextField;
 	private JPasswordField passwordField;
+	protected Processes processes= new Processes();
 	
 
 	public Login() {
@@ -95,9 +96,21 @@ public class Login implements ActionListener{
 			String ID= IDtextField.getText();
 			String password= String.valueOf(passwordField.getPassword());
 			
-Processes processes=new Processes();
-processes.loginToAccount(ID, password);
-frame.dispose();
+			Processes processes=new Processes();
+			processes.loginToAccount(ID, password);
+			
+			if(ID.equals(processes.getStudent().getID()) && password.equals(processes.getStudent().getPassword())) {
+				
+				new StudentDashboard();
+				frame.dispose();
+				
+			}else if(ID.equals(processes.getStudent().getID())==false ||password.equals(processes.getStudent().getPassword())==false) {
+				IDtextField.setText(null);
+				passwordField.setText(null);
+				JOptionPane.showMessageDialog(null,"Incorrect ID or password","Login Error",JOptionPane.ERROR_MESSAGE);
+				
+			}
+	
 				
 			}
 		});
@@ -116,15 +129,6 @@ frame.dispose();
 			}
 		});
 		
-		loginbtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String ID=IDtextField.getText();
-				String password=String.valueOf(passwordField.getPassword());
-				new StudentDashboard();
-						
-					}
-				});
 	}
 
 	@Override
