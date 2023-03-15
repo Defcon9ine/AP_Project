@@ -17,7 +17,8 @@ import javax.swing.JDesktopPane;
 public class Queries {
 
 	private JFrame frame;
-
+	private String selected;
+	protected Complaint complaint=new Complaint();
 	/**
 	 * Launch the application.
 	 */
@@ -143,6 +144,36 @@ public class Queries {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if ((chckbox0.isSelected())) {
+		               selected= String.valueOf(chckbox0.getText());
+		          }else if ((chckbox1.isSelected())) {
+		               selected= String.valueOf(chckbox1.getText());
+		          }else if ((chckbox2.isSelected())) {
+		               selected= String.valueOf(chckbox2.getText());
+		          }else if ((chckbox3.isSelected())) {
+		               selected= String.valueOf(chckbox3.getText());
+		          }else if ((chckbox4.isSelected())) {
+		               selected= String.valueOf(chckbox4.getText());
+		          }else if ((chckbox5.isSelected())) {
+		               selected= String.valueOf(chckbox5.getText());
+		          }else if ((chckbox6.isSelected())) {
+		               selected= String.valueOf(chckbox6.getText());
+		          }else if ((chckbox7.isSelected())) {
+		               selected= String.valueOf(chckbox7.getText());
+		          }else if ((chckbox8.isSelected())) {
+		               selected= String.valueOf(chckbox8.getText());
+		          }if ((chckbox9.isSelected())) {
+		               selected= String.valueOf(chckbox9.getText());
+		          }if ((rdbtnNewRadioButton.isSelected())) {
+		               selected= String.valueOf(rdbtnNewRadioButton.getText());
+		          }
+		          Processes process=new Processes();
+		          Complaint complaint=new Complaint();
+		          complaint.setComplaintDescription(String.valueOf(selected));
+		          complaint.setComplaintStatus("Unresolved");
+		          complaint.setStudentID(process.getStudent().getID());
+		          process.logComplaint(complaint);
+		          
 
 			}
 		});
