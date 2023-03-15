@@ -144,7 +144,7 @@ public class Queries {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ((chckbox0.isSelected())) {
+			if ((chckbox0.isSelected())) {
 		               selected= String.valueOf(chckbox0.getText());
 		          }else if ((chckbox1.isSelected())) {
 		               selected= String.valueOf(chckbox1.getText());
@@ -162,9 +162,9 @@ public class Queries {
 		               selected= String.valueOf(chckbox7.getText());
 		          }else if ((chckbox8.isSelected())) {
 		               selected= String.valueOf(chckbox8.getText());
-		          }if ((chckbox9.isSelected())) {
+		          }else if ((chckbox9.isSelected())) {
 		               selected= String.valueOf(chckbox9.getText());
-		          }if ((rdbtnNewRadioButton.isSelected())) {
+		          }else if ((rdbtnNewRadioButton.isSelected())) {
 		               selected= String.valueOf(rdbtnNewRadioButton.getText());
 		          }
 		          Processes process=new Processes();
