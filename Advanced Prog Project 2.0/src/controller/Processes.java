@@ -99,32 +99,17 @@ public class Processes {
 	}
 	
 	public static void logComplaint(Complaint complaint) {
-		String insertSQL="INSERT INTO projectdb.complain_has_student(StudentId)"
-		        +"VALUES('"+complaint.getStudentID()+"');";
+			String insertSQL="INSERT INTO projectdb.complain_has_student(StudentId,complain,status)"
+		        +"VALUES('"+complaint.getStudentID()+"','"+complaint.getComplaintDescription()+"','"
+				+complaint.getComplaintStatus()+"');";
+		
+		
 		try {
 			stmt=connection.createStatement();
 			int inserted=stmt.executeUpdate(insertSQL);
 			if(inserted==1) {
-				String insertComplaint="INSERT INTO projectdb.complainhistory(StudentId,Complain,status)"
-				        +"VALUES('"+complaint.getStudentID()+"','"+complaint.getComplaintDescription()+"','"
-						+complaint.getComplaintStatus()+"');";
-				try {
-					stmt=connection.createStatement();
-					int inserted1=stmt.executeUpdate(insertComplaint);
-					if(inserted1==1) {
-						JOptionPane.showMessageDialog(null,"Congratulations your record has been added succesfully",
-								"Insertion Status",JOptionPane.INFORMATION_MESSAGE);
-						return;
-					}else {
-						JOptionPane.showMessageDialog(null,"The Record was not inserted","Insertion Status",JOptionPane.ERROR_MESSAGE);
-					}	
-				}catch(SQLException e) {
-					JOptionPane.showMessageDialog(null,"You encountered an SQL error the record was not inserted ",
-							"Error status",JOptionPane.ERROR_MESSAGE);
-				}
-				catch(Exception e) {
-					JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
-				}
+				JOptionPane.showMessageDialog(null,"Congratulations your record has been added succesfully",
+						"Insertion Status",JOptionPane.INFORMATION_MESSAGE);
 			}else {
 				JOptionPane.showMessageDialog(null,"The Record was not inserted","Insertion Status",JOptionPane.ERROR_MESSAGE);
 			}	
