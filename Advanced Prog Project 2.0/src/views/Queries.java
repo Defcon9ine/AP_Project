@@ -170,7 +170,7 @@ public class Queries {
 		          Processes process=new Processes();
 		          Complaint complaint=new Complaint();
 		          complaint.setComplaintDescription(String.valueOf(selected));
-		          complaint.setComplaintStatus("Unresolved");
+		          complaint.setComplaintStatus("UNRESOLVED");
 		          complaint.setStudentID(process.getStudent().getID());
 		          process.logComplaint(complaint);
 		          
