@@ -1,0 +1,68 @@
+package views;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JScrollBar;
+
+import controller.Processes;
+import models.Student;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
+
+public class History extends JInternalFrame {
+
+	private JFrame frame;
+	Student student=new Student();
+	private JTable table;
+	public History() {
+		
+		super("History",true,true,true,true);
+		getContentPane().setLayout(null);
+		initialize();
+		this.setSize(930,709);
+		
+		JLabel lblNewLabel = new JLabel("History");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblNewLabel.setBounds(392, 34, 147, 63);
+		this.getContentPane().add(lblNewLabel, BorderLayout.EAST);
+		
+
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(112, 190, 599, 109);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{student.getComplaint(),student.getComplaintID(), student.getComplaintdate(), student.getComplaintstatus()},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"Complaint ", "Complaint ID", "Date", "Status"
+			}
+		));
+		this.setVisible(true);
+		
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		new Processes();
+		
+		Processes.history(student);
+
+	}
+}
