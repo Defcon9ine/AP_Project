@@ -77,7 +77,7 @@ public class Processes {
 				      +" FROM projectdb.students"
 				      +" WHERE idNumber ='"+ID+"';";
 		try {
-			stmt=connection.createStatement();
+			stmt=connection.createStatement();	
 			result=stmt.executeQuery(readSQL);
 			while(result.next()) {
 				String Id=result.getString("idNumber");
@@ -122,6 +122,31 @@ public class Processes {
 			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
 		}
 		
+	}
+	public static void history(Student student) {
+		String readSQL="SELECT *"
+				      +" FROM projectdb.complain_has_student"
+				      +" WHERE StudentId='"+student.getID()+"';";
+		try {
+			stmt=connection.createStatement();
+			result=stmt.executeQuery(readSQL);
+			while(result.next()) {
+				String complaint=result.getString("complain");
+				String time=result.getString("comaplainDate");
+				String status=result.getString("status");
+				String complaintID=result.getString("ComplainId");
+				
+				student.setComplaint(complaint);	
+				student.setComplaintID(complaintID);
+				student.setComplaintdate(time);
+				student.setComplaintstatus(status);
+				}
+		}catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }
