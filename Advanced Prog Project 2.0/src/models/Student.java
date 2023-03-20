@@ -10,8 +10,10 @@ private String email;
 private String phone;
 private String password;
 private String repassword;
-private String issueType;
-private String issueDescription;
+private String complaint;
+private String complaintdate;
+private String complaintID;
+private String complaintstatus;
 
 
 
@@ -70,20 +72,39 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
-public String getIssueType() {
-	return issueType;
+public String getComplaint() {
+	return complaint;
 }
 
-public void setIssueType(String issueType) {
-	this.issueType = issueType;
+public void setComplaint(String complaint) {
+	this.complaint = complaint;
 }
 
-public String getIssueDescription() {
-	return issueDescription;
+public String getComplaintdate() {
+	return complaintdate;
 }
 
-public void setIssueDescription(String issueDescription) {
-	this.issueDescription = issueDescription;
+public void setComplaintdate(String complaintdate) {
+	this.complaintdate = complaintdate;
+}
+
+public String getComplaintID() {
+	return complaintID;
+}
+
+public void setComplaintID(String complaintID) {
+	this.complaintID = complaintID;
+}
+
+
+
+
+public String getComplaintstatus() {
+	return complaintstatus;
+}
+
+public void setComplaintstatus(String complaintstatus) {
+	this.complaintstatus = complaintstatus;
 }
 
 public Student() {
@@ -99,16 +120,10 @@ public Student(String firstName, String lastName, String iD, String email, Strin
 	this.email = email;
 	this.phone = phone;
 	this.password = password;
-	this.issueType = issueType;
-	this.issueDescription = issueDescription;
+
 }
 
-@Override
-public String toString() {
-	return "Student [firstName=" + firstName + ", lastName=" + lastName + ", ID=" + ID + ", email=" + email + ", phone="
-			+ phone + ", password=" + password + ", issueType=" + issueType + ", issueDescription=" + issueDescription
-			+ "]";
-}
+
 
 
 }
