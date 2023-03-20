@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-
+import models.Complaint;
 import models.Student;
 import views.Login;
 import views.StudentDashboard;
@@ -17,8 +17,8 @@ public class Processes {
 	private static Connection connection;
 	private static Statement stmt;
 	private static ResultSet result;
-	Student student=new Student();
-	
+	static Student student=new Student();
+	Complaint complaint = new Complaint();	
 	
 	public Student getStudent() {
 		return student;
@@ -72,7 +72,7 @@ public class Processes {
 		
 	}
 	
-	public Student loginToAccount(String ID,String password) {
+	public static Student loginToAccount(String ID,String password) {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.students"
 				      +" WHERE idNumber ='"+ID+"';";
@@ -99,7 +99,7 @@ public class Processes {
 	}
 	
 	public static void logComplaint(Complaint complaint) {
-			String insertSQL="INSERT INTO projectdb.complain_has_student(StudentId,complain,status)"
+		String insertSQL="INSERT INTO projectdb.complain_has_student(StudentId,complain,status)"
 		        +"VALUES('"+complaint.getStudentID()+"','"+complaint.getComplaintDescription()+"','"
 				+complaint.getComplaintStatus()+"');";
 		
@@ -114,6 +114,7 @@ public class Processes {
 				JOptionPane.showMessageDialog(null,"The Record was not inserted","Insertion Status",JOptionPane.ERROR_MESSAGE);
 			}	
 		}catch(SQLException e) {
+			System.err.println("SQL Exception"+e.getMessage());
 			JOptionPane.showMessageDialog(null,"You encountered an SQL error the record was not inserted ",
 					"Error status",JOptionPane.ERROR_MESSAGE);
 		}
