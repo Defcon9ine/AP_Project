@@ -35,14 +35,23 @@ public class History extends JInternalFrame {
 
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(112, 190, 599, 109);
+		scrollPane.setBounds(76, 190, 742, 187);
 		getContentPane().add(scrollPane);
+		Processes processes=new Processes();
+	    student.setID(processes.getStudent().getID());
+	    processes.history(student);
 		
 		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{student.getComplaint(),student.getComplaintID(), student.getComplaintdate(), student.getComplaintstatus()},
+				{student.getComplaint(), student.getComplaintID(), student.getComplaintdate(), student.getComplaintstatus()},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
@@ -52,6 +61,7 @@ public class History extends JInternalFrame {
 				"Complaint ", "Complaint ID", "Date", "Status"
 			}
 		));
+		table.getColumnModel().getColumn(3).setPreferredWidth(78);
 		this.setVisible(true);
 		
 	}
