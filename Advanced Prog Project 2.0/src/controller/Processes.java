@@ -19,6 +19,14 @@ public class Processes {
 	private static ResultSet result;
 	static Student student=new Student();
 	Complaint complaint = new Complaint();	
+	static History historyModel = new History();
+	
+	public static History getHistoryModel() {
+		return historyModel;
+	}
+	public static void setHistoryModel(History historyModel) {
+		Processes.historyModel = historyModel;
+	}
 	
 	public Student getStudent() {
 		return student;
@@ -124,29 +132,43 @@ public class Processes {
 		
 	}
 	public static void history(Student student) {
-		String readSQL="SELECT *"
-				      +" FROM projectdb.complain_has_student"
-				      +" WHERE StudentId='"+student.getID()+"';";
-		try {
-			stmt=connection.createStatement();
-			result=stmt.executeQuery(readSQL);
-			while(result.next()) {
-				String complaint=result.getString("complain");
-				String time=result.getString("comaplainDate");
-				String status=result.getString("status");
-				String complaintID=result.getString("ComplainId");
-				
-				student.setComplaint(complaint);	
-				student.setComplaintID(complaintID);
-				student.setComplaintdate(time);
-				student.setComplaintstatus(status);
-				}
-		}catch(SQLException e) {
-			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+			ArrayList<String> idnum1 = new ArrayList<String>();
+			ArrayList<String> complaint2 = new ArrayList<String>();
+			ArrayList<String> complaintdate2 = new ArrayList<String>();
+			ArrayList<String> complaintID2 = new ArrayList<String>();
+			ArrayList<String> complaintstatus2 = new ArrayList<String>();
+
+			String readSQL="SELECT *"
+					      +" FROM projectdb.complain_has_student"
+					      +" WHERE StudentId='"+student.getID()+"';";
+			try {
+				stmt=connection.createStatement();
+				result=stmt.executeQuery(readSQL);
+				while(result.next()) {
+					String complaint=result.getString("complain");
+					String time=result.getString("complainDate");
+					String status=result.getString("status");
+					String complaintID=result.getString("ComplainId");
+
+					complaint2.add(complaint);
+					complaintdate2.add(time);
+					complaintID2.add(complaintID);
+					complaintstatus2.add(status);
+
+					}
+
+				historyModel.setComplaint(complaint2);
+				historyModel.setComplaintID(complaintID2);
+				historyModel.setComplaintdate(complaintdate2);
+				historyModel.setComplaintstatus(complaintstatus2);
+
+			}catch(SQLException e) {
+				System.err.println("SQL Exception"+e.getMessage());
+				JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+			}
+			catch(Exception e) {
+				JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+			}
 		}
-		catch(Exception e) {
-			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
-		}
-	}
 
 }
