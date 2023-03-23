@@ -1,0 +1,69 @@
+package models;
+
+import java.util.ArrayList;
+
+public class History {
+	
+	ArrayList<String> iD = new ArrayList<String>();
+	ArrayList<String> complaint = new ArrayList<String>();
+	ArrayList<String> complaintdate = new ArrayList<String>();
+	ArrayList<String> complaintID = new ArrayList<String>();
+	ArrayList<String> complaintstatus = new ArrayList<String>();
+	
+	public History() {
+		
+	}
+	
+	public History(ArrayList<String> iD, ArrayList<String> complaint, ArrayList<String> complaintdate,
+			ArrayList<String> complaintID, ArrayList<String> complaintstatus) {
+		super();
+		this.iD = iD;
+		this.complaint = complaint;
+		this.complaintdate = complaintdate;
+		this.complaintID = complaintID;
+		this.complaintstatus = complaintstatus;
+	}
+
+	public ArrayList<String> getiD() {
+		return iD;
+	}
+
+	public void setiD(ArrayList<String> iD) {
+		this.iD = iD;
+	}
+
+	public ArrayList<String> getComplaint() {
+		return complaint;
+	}
+
+	public void setComplaint(ArrayList<String> complaint) {
+		this.complaint = complaint;
+	}
+
+	public ArrayList<String> getComplaintdate() {
+		return complaintdate;
+	}
+
+	public void setComplaintdate(ArrayList<String> complaintdate) {
+		this.complaintdate = complaintdate;
+	}
+
+	public ArrayList<String> getComplaintID() {
+		return complaintID;
+	}
+
+	public void setComplaintID(ArrayList<String> complaintID) {
+		this.complaintID = complaintID;
+	}
+
+	public ArrayList<String> getComplaintstatus() {
+		return complaintstatus;
+	}
+
+	public void setComplaintstatus(ArrayList<String> complaintstatus) {
+		this.complaintstatus = complaintstatus;
+	}
+	
+	
+
+}
