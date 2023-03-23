@@ -7,22 +7,29 @@ import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JScrollBar;
 
 import controller.Processes;
 import models.Student;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import javax.swing.JScrollPane;
 
-public class History extends JInternalFrame {
+public class History extends JInternalFrame  {
 
 	private JFrame frame;
 	Student student=new Student();
 	private JTable table;
+	ArrayList<String> complaint2 = new ArrayList<String>();
+	ArrayList<String> complaintdate2 = new ArrayList<String>();
+	ArrayList<String> complaintID2 = new ArrayList<String>();
+	ArrayList<String> complaintstatus2 = new ArrayList<String>();
 	public History() {
 		
-		super("History",true,true,true,true);
+		///super("History",true,true,true,true);
 		getContentPane().setLayout(null);
 		initialize();
 		this.setSize(930,709);
@@ -35,34 +42,51 @@ public class History extends JInternalFrame {
 
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(76, 190, 742, 187);
+		scrollPane.setBounds(112, 190, 599, 109);
 		getContentPane().add(scrollPane);
-		Processes processes=new Processes();
-	    student.setID(processes.getStudent().getID());
-	    processes.history(student);
+		Processes historyprocesser=new Processes();
+		Student student = new Student();
+		student.setID(historyprocesser.getStudent().getID());
+		historyprocesser.history(student);
+		int arraySize=historyprocesser.getHistoryModel().getComplaint().size();
+		complaint2=historyprocesser.getHistoryModel().getComplaint();
+		complaintdate2=historyprocesser.getHistoryModel().getComplaintdate();
+		complaintID2=historyprocesser.getHistoryModel().getComplaintID();
+		complaintstatus2=historyprocesser.getHistoryModel().getComplaintstatus();
 		
-		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{student.getComplaint(), student.getComplaintID(), student.getComplaintdate(), student.getComplaintstatus()},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Complaint ", "Complaint ID", "Date", "Status"
-			}
-		));
-		table.getColumnModel().getColumn(3).setPreferredWidth(78);
+		
+		Object[][] rowData = {};
+	    Object[] columnNames = { "ID#", "Complaint", "Status","Date" };
+
+	    DefaultTableModel listTableModel;
+	    listTableModel = new DefaultTableModel(rowData, columnNames);
+	    for (int n = 1; n < arraySize; n++) {
+	       String data2 = complaint2.get(n);
+	       String data1 =complaintID2.get(n);
+	       String data3 = complaintstatus2.get(n);
+	       String data4 =complaintdate2.get(n);
+	     
+	       
+	      listTableModel.addRow(new Object[] {data1,data2,data3,data4});
+	    }
+
+	    
+		
+	    table = new JTable();
+	    
+	    table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	    scrollPane.setViewportView(table);
+	    table.setModel(listTableModel);
+	    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	    table.setCellEditor(null);
+	    
+	    table.setBounds(37, 143, 397, 183);
+		
+	   
+		
+		//this.add(table);
 		this.setVisible(true);
+		this.pack();
 		
 	}
 
@@ -75,4 +99,5 @@ public class History extends JInternalFrame {
 		Processes.history(student);
 
 	}
+
 }
