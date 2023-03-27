@@ -3,148 +3,122 @@ package views;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JCheckBox;
-import java.awt.Font;
+import javax.swing.JInternalFrame;
+import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
+
+import com.mysql.cj.x.protobuf.MysqlxExpr.Identifier;
+
+import controller.Processes;
+import models.Complaint;
+
+import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
+import javax.swing.JRadioButton;
 
-public class Queries {
+public class Complaints extends JInternalFrame{
 
-	private JFrame frame;
+	
 	private String selected;
 	protected Complaint complaint=new Complaint();
+
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Queries window = new Queries();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
-	public Queries() {
+	public Complaints() {
+		super("Queries & Complaints",true,true,true,true);
 		initialize();
+		this.toFront();
+		this.setSize(930,709);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		frame = new JFrame();
-		frame.setBounds(250, 100, 900, 544);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
+
 		
 		
-		JCheckBox chckbox0 = new JCheckBox("Tution deadline");
-		chckbox0.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox0.setBounds(84, 150, 164, 21);
-		frame.getContentPane().add(chckbox0);
+		this.setSize(954, 747);
 		
-		JCheckBox chckbox1 = new JCheckBox("What does each letter grade mean");
-		chckbox1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox1.setBounds(84, 192, 259, 21);
-		frame.getContentPane().add(chckbox1);
-		
-		JCheckBox chckbox2 = new JCheckBox("How many credits do I need to graduate");
-		chckbox2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox2.setBounds(84, 234, 323, 21);
-		frame.getContentPane().add(chckbox2);
-		
-		JCheckBox chckbox3 = new JCheckBox("Where do i view my timetable");
-		chckbox3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox3.setBounds(84, 276, 277, 21);
-		frame.getContentPane().add(chckbox3);
-		
-		JCheckBox chckbox4 = new JCheckBox("Where is my class link?");
-		chckbox4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox4.setBounds(84, 322, 237, 21);
-		frame.getContentPane().add(chckbox4);
-		
-		JCheckBox chckbox5 = new JCheckBox("Missing grade");
-		chckbox5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox5.setBounds(523, 150, 164, 21);
-		frame.getContentPane().add(chckbox5);
-		
-		JCheckBox chckbox6 = new JCheckBox("Tution deadline");
-		chckbox6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox6.setBounds(523, 192, 164, 21);
-		frame.getContentPane().add(chckbox6);
-		
-		JCheckBox chckbox7 = new JCheckBox("Tution deadline");
-		chckbox7.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox7.setBounds(523, 234, 164, 21);
-		frame.getContentPane().add(chckbox7);
-		
-		JCheckBox chckbox8 = new JCheckBox("Tution deadline");
-		chckbox8.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox8.setBounds(523, 276, 164, 21);
-		frame.getContentPane().add(chckbox8);
-		
-		JCheckBox chckbox9 = new JCheckBox("Tution deadline");
-		chckbox9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		chckbox9.setBounds(523, 322, 164, 21);
-		frame.getContentPane().add(chckbox9);
+		this.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Queries");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(106, 60, 198, 42);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(103, 55, 138, 32);
+		this.getContentPane().add(lblNewLabel);
 		
 		JLabel lblComplaints = new JLabel("Complaints");
 		lblComplaints.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblComplaints.setBounds(525, 60, 198, 42);
-		frame.getContentPane().add(lblComplaints);
+		lblComplaints.setBounds(522, 55, 138, 32);
+		this.getContentPane().add(lblComplaints);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("My problem or query isnt listed here");
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+		JCheckBox chckbox0 = new JCheckBox("When is the Tuition Deadline?");
+		chckbox0.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox0.setBounds(83, 93, 269, 21);
+		this.getContentPane().add(chckbox0);
+		
+		JCheckBox chckbox1 = new JCheckBox("What does each letter grade mean?");
+		chckbox1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox1.setBounds(83, 126, 269, 21);
+		this.getContentPane().add(chckbox1);
+		
+		JCheckBox chckbox2 = new JCheckBox("How many credits do I need to graduate? ");
+		chckbox2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox2.setBounds(83, 160, 328, 21);
+		this.getContentPane().add(chckbox2);
+		
+		JCheckBox chckbox3 = new JCheckBox("Where do i view my timetable? ");
+		chckbox3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox3.setBounds(83, 194, 328, 21);
+		this.getContentPane().add(chckbox3);
+		
+		JCheckBox chckbox4= new JCheckBox("Where is my link? ");
+		chckbox4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox4.setBounds(83, 227, 328, 21);
+		this.getContentPane().add(chckbox4);
+		
+		JCheckBox chckbox5= new JCheckBox("Class Link is not working");
+		chckbox5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox5.setBounds(496, 93, 328, 21);
+		this.getContentPane().add(chckbox5);
+		
+		JCheckBox chckbox6 = new JCheckBox("Cannot access the utech portal");
+		chckbox6.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox6.setBounds(496, 128, 328, 21);
+		this.getContentPane().add(chckbox6);
+		
+		JCheckBox chckbox7 = new JCheckBox("Missing grades");
+		chckbox7.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox7.setBounds(496, 162, 328, 21);
+		this.getContentPane().add(chckbox7);
+		
+		JCheckBox chckbox8 = new JCheckBox("Tuition has not been posted");
+		chckbox8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox8.setBounds(496, 196, 328, 21);
+		this.getContentPane().add(chckbox8);
+		
+		JCheckBox chckbox9 = new JCheckBox("Forgot my password");
+		chckbox9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbox9.setBounds(496, 229, 328, 21);
+		this.getContentPane().add(chckbox9);
+		
+		JButton submitButton = new JButton("Submit");
+		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JTextArea textArea = new JTextArea();
-				textArea.setBounds(37, 32, 686, 223);
-				textArea.setVisible(true);
-				frame.getContentPane().add(textArea);
-			}
-		});
-		rdbtnNewRadioButton.setBounds(37, 434, 237, 29);
-		frame.getContentPane().add(rdbtnNewRadioButton);
-
-		
-		ButtonGroup buttonGroup=new ButtonGroup();
-		buttonGroup.add(chckbox0);
-		buttonGroup.add(chckbox1);
-		buttonGroup.add(chckbox2);
-		buttonGroup.add(chckbox3);
-		buttonGroup.add(chckbox4);
-		buttonGroup.add(chckbox5);
-		buttonGroup.add(chckbox6);
-		buttonGroup.add(chckbox7);
-		buttonGroup.add(chckbox8);
-		buttonGroup.add(chckbox9);
-		buttonGroup.add(rdbtnNewRadioButton);
-		
-		JButton btnNewButton = new JButton("Submit");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			if ((chckbox0.isSelected())) {
+				if ((chckbox0.isSelected())) {
 		               selected= String.valueOf(chckbox0.getText());
 		          }else if ((chckbox1.isSelected())) {
 		               selected= String.valueOf(chckbox1.getText());
@@ -164,23 +138,54 @@ public class Queries {
 		               selected= String.valueOf(chckbox8.getText());
 		          }else if ((chckbox9.isSelected())) {
 		               selected= String.valueOf(chckbox9.getText());
-		          }else if ((rdbtnNewRadioButton.isSelected())) {
-		               selected= String.valueOf(rdbtnNewRadioButton.getText());
 		          }
-		          Processes process=new Processes();
+				  Processes process=new Processes();
 		          Complaint complaint=new Complaint();
 		          complaint.setComplaintDescription(String.valueOf(selected));
-		          complaint.setComplaintStatus("UNRESOLVED");
+		          complaint.setComplaintStatus("Unresolved");
 		          complaint.setStudentID(process.getStudent().getID());
 		          process.logComplaint(complaint);
-		          
-
 			}
 		});
-		btnNewButton.setBounds(427, 422, 128, 37);
-		frame.getContentPane().add(btnNewButton);
+		submitButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		submitButton.setBounds(304, 431, 165, 38);
+		this.getContentPane().add(submitButton);
+		this.setVisible(true);
+
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("My problem isnt listed here");
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JTextArea textArea = new JTextArea();
+				textArea.setBounds(250, 400, 10, 2);
+				
+				textArea.setVisible(true);
+				getContentPane().add(textArea);
+				}
+		});
+		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnNewRadioButton.setBounds(270, 284, 248, 21);
+		getContentPane().add(rdbtnNewRadioButton);
 		
-
-
+		          
+		
+		ButtonGroup buttonGroup=new ButtonGroup();
+		buttonGroup.add(chckbox0);
+		buttonGroup.add(chckbox1);
+		buttonGroup.add(chckbox2);
+		buttonGroup.add(chckbox3);
+		buttonGroup.add(chckbox4);
+		buttonGroup.add(chckbox5);
+		buttonGroup.add(chckbox6);
+		buttonGroup.add(chckbox7);
+		buttonGroup.add(chckbox8);
+		buttonGroup.add(chckbox9);
+		buttonGroup.add(rdbtnNewRadioButton);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(103, 311, 581, 82);
+		getContentPane().add(textArea);
+		
+	
+	
 	}
 }
