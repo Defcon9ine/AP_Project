@@ -58,7 +58,7 @@ public class SupervisorDashboard {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new Login();
+				new SupervisorLogin();
 				frame.dispose();
 				frame.dispose();
 				
