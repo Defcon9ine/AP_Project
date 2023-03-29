@@ -1,0 +1,133 @@
+package views;
+
+
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI.KeyHandler;
+
+import controller.Processes;
+
+
+import java.awt.Font;
+import java.awt.event.*;
+import java.util.HashMap;
+
+public class SupervisorLogin implements ActionListener {
+
+	private JFrame frame;
+	private JTextField IDtextField;
+	private JPasswordField passwordField;
+	protected Processes processes= new Processes();
+	
+	
+
+	public SupervisorLogin() {
+		initialize();
+	}
+
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	 
+	public void initialize() {
+
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 546, 387);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);		
+		
+		//textfields
+		IDtextField = new JTextField();
+		IDtextField.setBounds(170, 82, 244, 32);
+		frame.getContentPane().add(IDtextField);
+		IDtextField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(170, 156, 244, 32);
+		frame.getContentPane().add(passwordField);
+		
+		
+		//JLabels
+		JLabel lblNewLabel = new JLabel("ID");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(134, 82, 26, 32);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblPasword = new JLabel("Password");
+		lblPasword.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPasword.setBounds(76, 156, 84, 32);
+		frame.getContentPane().add(lblPasword);
+		
+		JLabel lblNewLabel_1 = new JLabel("I dont have an account");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(11, 277, 168, 39);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		
+		//JButtons
+		JButton signUpbtn = new JButton("Sign Up");
+		signUpbtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		signUpbtn.setBounds(175, 277, 108, 32);
+		frame.getContentPane().add(signUpbtn);
+		
+		signUpbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new SupervisorSignup();
+				frame.dispose();
+				
+			}
+		});
+		
+		JButton loginbtn = new JButton("Login");
+		loginbtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		loginbtn.setBounds(420, 198, 102, 32);
+		frame.getContentPane().add(loginbtn);
+		loginbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			String StaffID= IDtextField.getText();
+			String password= String.valueOf(passwordField.getPassword());
+			
+			Processes processes=new Processes();
+			Processes.adminloginToAccount(StaffID, password);
+			
+			if(StaffID.equals(processes.getEmployees().getStaffID()) && password.equals(processes.getEmployees().getPassword())) {
+				
+				new SupervisorDashboard();
+				frame.dispose();
+				
+			}else if(StaffID.equals(processes.getEmployees().getStaffID())==false ||password.equals(processes.getEmployees().getPassword())==false) {
+				IDtextField.setText(null);
+				passwordField.setText(null);
+				JOptionPane.showMessageDialog(null,"Incorrect ID or password","Login Error",JOptionPane.ERROR_MESSAGE);
+				
+			}
+	
+				
+			}
+		});
+		
+		JLabel lblNewLabel_2 = new JLabel("Supervisor Login");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_2.setBounds(200, 21, 235, 51);
+		frame.getContentPane().add(lblNewLabel_2);
+		frame.setVisible(true);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}
