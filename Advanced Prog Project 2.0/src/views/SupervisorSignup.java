@@ -161,9 +161,10 @@ public class SupervisorSignup implements ActionListener{
 
 
 				if(password.equals(repassword) &&password.equals("")==false) {
-					new SupervisorDashboard();
+					ps.admincreateaccount(employee);
+					new SupervisorLogin();
 					frame.dispose();
-				    ps.admincreateaccount(employee);		
+				    		
 				//}else if (idstring.equals(e)==false || password.equals("")) {
 					//JOptionPane.showMessageDialog(null,"No ID or password entered","Sign Up error",JOptionPane.ERROR_MESSAGE);
 					
