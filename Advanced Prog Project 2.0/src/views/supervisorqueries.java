@@ -19,6 +19,9 @@ import models.Student;
 import models.History;
 
 import javax.swing.JScrollPane;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
@@ -30,9 +33,14 @@ public class supervisorqueries extends JInternalFrame{
 	ArrayList<String> complaintdate2 = new ArrayList<String>();
 	ArrayList<String> complaintID2 = new ArrayList<String>();
 	ArrayList<String> complaintstatus2 = new ArrayList<String>();
+	
+	ArrayList<String> advisorId1 = new ArrayList<String>();
+	ArrayList<String> fName3 = new ArrayList<String>();
+	ArrayList<String> lName3 = new ArrayList<String>();
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	Processes processes=new Processes();
 	
 
 	public supervisorqueries() {
@@ -52,9 +60,28 @@ public class supervisorqueries extends JInternalFrame{
 		lblNewLabel.setBounds(73, 62, 262, 36);
 		getContentPane().add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
+		Processes procescombo = new Processes();
+		procescombo.getAllAdvisor();
+		advisorId1=procescombo.getAdvisors().getAdvisorId();
+		fName3=procescombo.getAdvisors().getfName();
+		lName3=procescombo.getAdvisors().getlName();
+		int adSize=procescombo.getAdvisors().getAdvisorId().size();
+		ArrayList<String> allAdvisors = new ArrayList<String>();
+		String[] aaAdvisor;
+		for (int n = 1; n < adSize; n++) {
+		       String info1 =advisorId1.get(n);
+		       String info2 = fName3.get(n);
+		       String info3 =lName3.get(n);
+		      
+		     
+		       
+		      allAdvisors.add(""+info2+" "+info3+""+" "+info1+"");
+		      
+		}
+		aaAdvisor = allAdvisors.toArray(new String[0]);
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(aaAdvisor);
+		JComboBox<String> comboBox= new JComboBox<>(model);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Felica", "simone", "chisane"}));
 		comboBox.setBounds(333, 64, 279, 33);
 		getContentPane().add(comboBox);
 		
@@ -148,6 +175,19 @@ public class supervisorqueries extends JInternalFrame{
 	    	    
 	    	    JButton btnNewButton = new JButton("Assign");
 	    	    btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	    	    btnNewButton.addActionListener(new ActionListener() {
+	    			public void actionPerformed(ActionEvent e) {
+	    				
+	    				String studentId =textField.getText();
+	    		        String complaintId=textField_1.getText();
+	    				String staffChoosen=comboBox.getSelectedItem().toString();
+	    				
+	    				String[] smallArray=staffChoosen.split(" ");
+	    				String staffId=smallArray[2];
+	    				
+	    				processes.AssignAdvisor(studentId, complaintId, staffId);
+	    			}
+	    		});
 	    	    btnNewButton.setBounds(819, 342, 137, 33);
 	    	    getContentPane().add(btnNewButton);
 	    	    
