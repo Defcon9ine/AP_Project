@@ -9,6 +9,7 @@ private String email;
 private String phone;
 private String password;
 private String repassword;
+private String category;
 
 
 public Employees() {
@@ -16,7 +17,8 @@ public Employees() {
 }
 
 
-public Employees(String staffID, String firstName, String lastName, String email, String phone,String password,String repassword) {
+public Employees(String staffID, String firstName, String lastName, String email,
+		String phone,String password,String repassword,String category) {
 	super();
 	this.staffID = staffID;
 	this.firstName = firstName;
@@ -25,6 +27,7 @@ public Employees(String staffID, String firstName, String lastName, String email
 	this.phone = phone;
 	this.password=password;
 	this.repassword=password;
+	this.category=category;
 }
 
 
@@ -95,6 +98,17 @@ public String getRepassword() {
 
 public void setRepassword(String repassword) {
 	this.repassword = repassword;
+}
+
+
+
+public String getCategory() {
+	return category;
+}
+
+
+public void setCategory(String category) {
+	this.category = category;
 }
 
 
