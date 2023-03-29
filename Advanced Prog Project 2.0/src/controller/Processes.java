@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import models.Advisors;
 import models.Complaint;
 import models.Employees;
 import models.Student;
 import models.History;
-import views.Login;
-import views.StudentDashboard;
+
 
 public class Processes {
 	private static Connection connection;
@@ -24,8 +24,16 @@ public class Processes {
 	Complaint complaint = new Complaint();	
 	static Employees employees=new Employees();
 	static History historyModel = new History();
+	static Advisors advisors =  new Advisors();
 	
 	
+	
+	public static Advisors getAdvisors() {
+		return advisors;
+	}
+	public static void setAdvisors(Advisors advisors) {
+		Processes.advisors = advisors;
+	}
 	public static Employees getEmployees() {
 		return employees;
 	}
@@ -92,7 +100,7 @@ public class Processes {
 	}
 	public static void admincreateaccount(Employees employee) { 
 		String Advisor="Advisor";
-		String insertSQL="INSERT INTO projectdb.staff(IdNumber,FirstName,LastName,EmailAddress,catergory,password)"
+		String insertSQL="INSERT INTO projectdb.staff(IdNumber,FirstName,LastName,EmailAddress,category,password)"
 				        +"VALUES('"+employee.getStaffID()+"','"+employee.getFirstName()+"','"+employee.getLastName()+"','"
 				+employee.getEmail()+"','"+Advisor+"','"+employee.getPassword	()+"');";
 		try {
@@ -289,5 +297,72 @@ public class Processes {
 			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public static void getAllAdvisor() {
+		ArrayList<String> advisorId1 = new ArrayList<String>();
+		ArrayList<String> fName3 = new ArrayList<String>();
+		ArrayList<String> lName3 = new ArrayList<String>();
+		ArrayList<String> email3 = new ArrayList<String>();
+		ArrayList<String> category3 = new ArrayList<String>();
+		ArrayList<String> contact3 = new ArrayList<String>();
+		String Advisor="Advisor";
+		String readSQL="SELECT *"
+				      +" FROM projectdb.staff"
+				      +" WHERE category='"+Advisor+"';";
+		try {
+			stmt=connection.createStatement();
+			result=stmt.executeQuery(readSQL);
+			while(result.next()) {
+				String id=result.getString("IdNumber");
+				String fn=result.getString("FirstName");
+				String ln=result.getString("LastName");
+				String em=result.getString("EmailAddress");
+				String cat=result.getString("category");
 
+				advisorId1.add(id);
+				fName3.add(fn);
+				lName3.add(ln);
+				email3.add(em);
+				category3.add(cat);
+
+				}
+            advisors.setAdvisorId(advisorId1);
+			advisors.setfName(fName3);
+			advisors.setlName(lName3);
+			advisors.setEmail(email3);
+			advisors.setCategory(category3);
+
+		}catch(SQLException e) {
+			System.err.println("SQL Exception"+e.getMessage());
+			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void AssignAdvisor(String stuId, String comId, String staffId){
+		String insertStaff = "UPDATE projectdb.complain_has_student"+" SET `StaffId` ='"
+				+staffId+"'"+" WHERE `StudentId`='"+stuId+"' AND `ComplainId`="+comId+";";
+		
+		
+		try {
+			stmt=connection.createStatement();
+			int inserted=stmt.executeUpdate(insertStaff);
+			if(inserted==1) {
+				JOptionPane.showMessageDialog(null,"Advisor has been assign to student","Assign Status",JOptionPane.INFORMATION_MESSAGE);
+				
+				
+				return;
+			}else {
+				JOptionPane.showMessageDialog(null," Error Assigning Advisor ","Assign Status",JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
 }
