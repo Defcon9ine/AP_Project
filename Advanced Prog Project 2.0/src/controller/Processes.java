@@ -91,9 +91,10 @@ public class Processes {
 		
 	}
 	public static void admincreateaccount(Employees employee) { 
-		String insertSQL="INSERT INTO projectdb.staff(IdNumber,FirstName,LastName,EmailAddress,password)"
+		String Advisor="Advisor";
+		String insertSQL="INSERT INTO projectdb.staff(IdNumber,FirstName,LastName,EmailAddress,catergory,password)"
 				        +"VALUES('"+employee.getStaffID()+"','"+employee.getFirstName()+"','"+employee.getLastName()+"','"
-				+employee.getEmail()+"','"+employee.getPassword	()+"');";
+				+employee.getEmail()+"','"+Advisor+"','"+employee.getPassword	()+"');";
 		try {
 			stmt=connection.createStatement();
 			int inserted=stmt.executeUpdate(insertSQL);
@@ -162,18 +163,16 @@ public class Processes {
 	public static Employees adminloginToAccount(String staffID,String password) {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.staff"
-				      +" WHERE idNumber ='"+staffID+"';";
+				      +" WHERE IdNumber ='"+staffID+"';";
 		try {
 			stmt=connection.createStatement();	
 			result=stmt.executeQuery(readSQL);
 			while(result.next()) {
-				String Id=result.getString("idNumber");
+				String Id=result.getString("IdNumber");
 				String passwordString=result.getString("password");
-				student.setID(Id);
-				student.setPassword(passwordString);
+				employees.setStaffID(Id);
+				employees.setPassword(passwordString);
 			} 
-
-			
 			
 		}catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
