@@ -34,7 +34,7 @@ public String getPassword() {
 }
 
 
-public void setPassword(String passwordString) {
+public void setPassword(String password) {
 	this.password = password;
 }
 
