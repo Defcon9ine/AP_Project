@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.PublicKey;
+
 import javax.swing.JTextField;
 
 public class supervisorqueries extends JInternalFrame{
@@ -142,6 +144,7 @@ public class supervisorqueries extends JInternalFrame{
 	    	    
 	    
 	    textField = new JTextField();
+	    textField.setEditable(false);
 	    textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    textField.setBounds(23, 385, 137, 30);
 	    getContentPane().add(textField);
@@ -151,6 +154,7 @@ public class supervisorqueries extends JInternalFrame{
 		
 	    		
 	    	    table = new JTable();
+
 	    	    table.addMouseListener(new MouseAdapter() {
 	    	    	@Override
 	    	    	public void mouseClicked(MouseEvent e) {
@@ -172,6 +176,7 @@ public class supervisorqueries extends JInternalFrame{
 	    	    table.setCellEditor(null);   
 	    	    //table.setBounds(37, 143, 397, 183);
 	    	    table.setSize(978,495);
+	    	    
 	    	    
 	    	    JButton btnNewButton = new JButton("Assign");
 	    	    btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -197,6 +202,7 @@ public class supervisorqueries extends JInternalFrame{
 	    	    getContentPane().add(lblNewLabel_1);
 	    	    
 	    	    textField_1 = new JTextField();
+	    	    textField_1.setEditable(false);
 	    	    textField_1.setText("");
 	    	    textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    	    textField_1.setColumns(10);
@@ -209,6 +215,7 @@ public class supervisorqueries extends JInternalFrame{
 	    	    getContentPane().add(lblNewLabel_1_1);
 	    	    
 	    	    textField_2 = new JTextField();
+	    	    textField_2.setEditable(false);
 	    	    textField_2.setText("");
 	    	    textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    	    textField_2.setColumns(10);
