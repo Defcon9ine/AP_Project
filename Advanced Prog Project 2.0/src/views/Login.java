@@ -123,8 +123,8 @@ public class Login implements ActionListener{
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new studentorstaff();
-				frame.dispose();
+				
+				
 				
 			}
 		});
