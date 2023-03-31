@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class SupervisorSignup implements ActionListener{
+public class StaffSignup implements ActionListener{
 
 	private JFrame frame;
 	private JTextField firstnametextfield;
