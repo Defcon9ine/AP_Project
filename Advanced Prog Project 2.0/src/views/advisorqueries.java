@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.Processes;
 import models.Student;
 import models.History;
+import models.ResolveComplaint;
 
 import javax.swing.JScrollPane;
 
@@ -42,6 +45,7 @@ public class advisorqueries extends JInternalFrame{
 	private JTextField textField_1;
 	private JTextField textField_2;
 	Processes processes=new Processes();
+	ResolveComplaint resolveComplaint=new ResolveComplaint();
 	
 
 	public advisorqueries() {
@@ -90,9 +94,9 @@ public class advisorqueries extends JInternalFrame{
 		label.setBounds(0, 0, 0, 0);
 		
 		Processes history=new Processes();
-		Student student = new Student();
-		student.setID(history.getStudent().getID());
-		Processes.adminhistory(student);
+		
+		String advisorId=history.getEmployees().getStaffID();
+		Processes.AdvisorView(advisorId);
 		int arraySize=Processes.getHistoryModel().getComplaint().size();
 		idnum1=Processes.getHistoryModel().getiD();
 		complaint2=Processes.getHistoryModel().getComplaint();
@@ -144,8 +148,27 @@ public class advisorqueries extends JInternalFrame{
 	    				String studentId =textField.getText();
 	    		        String complaintId=textField_1.getText();
 	    		        String resolution=textArea.getText();
-
-	    				
+	    		        System.out.println(""+complaintId);
+	    		        if (complaintId.equals("")) {
+	    		        	JOptionPane.showMessageDialog(null,"You haven't selected student to respose to",
+	    		        			"Resolved Status",JOptionPane.ERROR_MESSAGE);
+	    		        }else if (resolution.equals("")) {
+	    		        	JOptionPane.showMessageDialog(null,"You haven't enter a respose ",
+	    		        			"Resolved Status",JOptionPane.ERROR_MESSAGE);
+							
+						}else {
+							resolveComplaint.setAdvisorId(processes.getEmployees().getStaffID());
+		    		        resolveComplaint.setStudentID(studentId);
+		    		        resolveComplaint.setComplaintID(complaintId);
+		    		        resolveComplaint.setResponses(resolution);
+		    		        resolveComplaint.setComplaintStatus("RESOLVED");
+						
+							processes.ResolveComplain(resolveComplaint);
+		    		        processes.GettingResolvedCompliant(resolveComplaint);
+						}
+	    		        
+	    		       
+	    		        	
 	    			}
 	    		});
 	    	    btnNewButton.setBounds(819, 397, 137, 33);
@@ -182,7 +205,7 @@ public class advisorqueries extends JInternalFrame{
 	    	    
 	    	    
 	    	    JScrollPane scrollPane = new JScrollPane();
-	    	    scrollPane.setBounds(10, 10, 763, 210);
+	    	    scrollPane.setBounds(10, 10, 894, 216);
 	    	    getContentPane().add(scrollPane);
 	    	    
 	    	    
