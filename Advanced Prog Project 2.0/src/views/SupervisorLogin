@@ -97,14 +97,24 @@ public class SupervisorLogin implements ActionListener {
 				
 			String StaffID= IDtextField.getText();
 			String password= String.valueOf(passwordField.getPassword());
-			
+			String sup="Supervisor";
+			String adv="Advisor";
 			Processes processes=new Processes();
 			Processes.adminloginToAccount(StaffID, password);
-			
+		
 			if(StaffID.equals(processes.getEmployees().getStaffID()) && password.equals(processes.getEmployees().getPassword())) {
 				
-				new SupervisorDashboard();
-				frame.dispose();
+				if(sup.equals(processes.getEmployees().getCategory())) {
+					new SupervisorDashboard();
+					frame.dispose();
+				}else if (adv.equals(processes.getEmployees().getCategory())){
+					new AdvisorDashboard();
+					frame.dispose();
+				}else {
+					JOptionPane.showMessageDialog(null,"Category Unknown","Login Error",JOptionPane.ERROR_MESSAGE);
+					
+				}
+				
 				
 			}else if(StaffID.equals(processes.getEmployees().getStaffID())==false ||password.equals(processes.getEmployees().getPassword())==false) {
 				IDtextField.setText(null);
