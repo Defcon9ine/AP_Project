@@ -1,0 +1,88 @@
+package models;
+
+public class ResolveComplaint {
+	
+	private String studentID;
+	private String advisorId;
+	private String complaintID;
+	private String complaintStatus;
+	private String complaintDate;
+	private String compaliant;
+	private String responses;
+	
+	public ResolveComplaint() {
+		
+		
+	} 
+	
+	public ResolveComplaint(String studentID, String advisorId, String complaintID, 
+			String complaintStatus, String complaintDate,String responses,String compliant) {
+		
+		this.studentID = studentID;
+		this.advisorId = advisorId;
+		this.complaintID = complaintID;
+		this.complaintStatus = complaintStatus;
+		this.complaintDate = complaintDate;
+		this.responses = responses;
+		this.compaliant=compliant;
+	}
+
+	public String getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+
+	public String getAdvisorId() {
+		return advisorId;
+	}
+
+	public void setAdvisorId(String advisorId) {
+		this.advisorId = advisorId;
+	}
+
+	public String getComplaintID() {
+		return complaintID;
+	}
+
+	public void setComplaintID(String complaintID) {
+		this.complaintID = complaintID;
+	}
+
+	public String getComplaintStatus() {
+		return complaintStatus;
+	}
+
+	public void setComplaintStatus(String complaintStatus) {
+		this.complaintStatus = complaintStatus;
+	}
+
+	public String getComplaintDate() {
+		return complaintDate;
+	}
+
+	public void setComplaintDate(String complaintDate) {
+		this.complaintDate = complaintDate;
+	}
+
+	public String getResponses() {
+		return responses;
+	}
+
+	public void setResponses(String responses) {
+		this.responses = responses;
+	}
+
+	public String getCompaliant() {
+		return compaliant;
+	}
+
+	public void setCompaliant(String compaliant) {
+		this.compaliant = compaliant;
+	}
+	
+	
+
+}
