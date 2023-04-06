@@ -129,7 +129,6 @@ public class advisorqueries extends JInternalFrame{
 	    	    
 	    
 	    textField = new JTextField();
-	    textField.setEditable(false);
 	    textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    textField.setBounds(0, 265, 137, 30);
 	    getContentPane().add(textField);
@@ -181,7 +180,6 @@ public class advisorqueries extends JInternalFrame{
 	    	    getContentPane().add(lblNewLabel_1);
 	    	    
 	    	    textField_1 = new JTextField();
-	    	    textField_1.setEditable(false);
 	    	    textField_1.setText("");
 	    	    textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    	    textField_1.setColumns(10);
@@ -194,7 +192,6 @@ public class advisorqueries extends JInternalFrame{
 	    	    getContentPane().add(lblNewLabel_1_1);
 	    	    
 	    	    textField_2 = new JTextField();
-	    	    textField_2.setEditable(false);
 	    	    textField_2.setText("");
 	    	    textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    	    textField_2.setColumns(10);
