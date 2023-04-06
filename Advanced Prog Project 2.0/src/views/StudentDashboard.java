@@ -2,6 +2,7 @@ package views;
 
 
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import models.Student;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -26,6 +29,7 @@ import java.awt.Toolkit;
 public class StudentDashboard {
 
 	private JFrame frame;
+	Student student=new Student();
 
 	public StudentDashboard() {
 		initialize();
@@ -36,8 +40,14 @@ public class StudentDashboard {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setResizable(false);
+
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBounds(219, 10, 1114, 709);
+		frame.getContentPane().add(desktopPane);
+		
 
 
 		
@@ -48,13 +58,19 @@ public class StudentDashboard {
 		frame.setVisible(true);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(64, 0, 64));
+		panel.setBackground(new Color(0, 128, 192));
 		panel.setForeground(new Color(0, 128, 255));
 		panel.setBounds(0, 0, 215, 769);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Home");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnNewButton.setBackground(new Color(128, 255, 255));
 		btnNewButton.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
 		btnNewButton.setBounds(0, 64, 205, 80);
 		panel.add(btnNewButton);
@@ -77,7 +93,8 @@ public class StudentDashboard {
 		btnNewButton_2.setFont(new Font("Lucida Fax", Font.PLAIN, 15));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-new Queries();
+
+desktopPane.add(new Complaints());
 				
 			}
 		});
@@ -93,10 +110,18 @@ new Queries();
 		btnNewButton_4.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				desktopPane.add(new History());
+				
 			}
+			
 		});
+		
+	
+		
 		btnNewButton_4.setBounds(0, 476, 205, 80);
 		panel.add(btnNewButton_4);
-	}
+		
 
+	}
 }
