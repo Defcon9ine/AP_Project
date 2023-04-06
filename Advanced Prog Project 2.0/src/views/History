@@ -17,6 +17,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.JScrollPane;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import javax.swing.SpringLayout;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class History extends JInternalFrame  {
 
@@ -28,31 +34,38 @@ public class History extends JInternalFrame  {
 	ArrayList<String> complaintID2 = new ArrayList<String>();
 	ArrayList<String> complaintstatus2 = new ArrayList<String>();
 	public History() {
-		
-		///super("History",true,true,true,true);
-		getContentPane().setLayout(null);
+		super("History",true,true,true,true);
 		initialize();
-		this.setSize(930,709);
+		this.getContentPane().setLayout(null);
+		this.setSize(978,495);
+		this.toFront();
 		
 		JLabel lblNewLabel = new JLabel("History");
+		lblNewLabel.setBounds(0, 0, 0, 0);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel.setBounds(392, 34, 147, 63);
-		this.getContentPane().add(lblNewLabel, BorderLayout.EAST);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setBounds(0, 0, 0, 0);
+		
+		JLabel label_2 = new JLabel("");
+		label_2.setBounds(0, 0, 0, 0);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 0, 0);
 		
 
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(112, 190, 599, 109);
-		getContentPane().add(scrollPane);
+		scrollPane.setBounds(0, 0, 966, 456);
 		Processes historyprocesser=new Processes();
 		Student student = new Student();
 		student.setID(historyprocesser.getStudent().getID());
-		historyprocesser.history(student);
-		int arraySize=historyprocesser.getHistoryModel().getComplaint().size();
-		complaint2=historyprocesser.getHistoryModel().getComplaint();
-		complaintdate2=historyprocesser.getHistoryModel().getComplaintdate();
-		complaintID2=historyprocesser.getHistoryModel().getComplaintID();
-		complaintstatus2=historyprocesser.getHistoryModel().getComplaintstatus();
+		Processes.history(student);
+		int arraySize=Processes.getHistoryModel().getComplaint().size();
+		complaint2=Processes.getHistoryModel().getComplaint();
+		complaintdate2=Processes.getHistoryModel().getComplaintdate();
+		complaintID2=Processes.getHistoryModel().getComplaintID();
+		complaintstatus2=Processes.getHistoryModel().getComplaintstatus();
 		
 		
 		Object[][] rowData = {};
@@ -77,16 +90,24 @@ public class History extends JInternalFrame  {
 	    table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 	    scrollPane.setViewportView(table);
 	    table.setModel(listTableModel);
-	    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-	    table.setCellEditor(null);
-	    
-	    table.setBounds(37, 143, 397, 183);
+	    //table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	    table.setCellEditor(null);   
+	    //table.setBounds(37, 143, 397, 183);
+	    table.setSize(978,495);
+	    getContentPane().setLayout(null);
+	    getContentPane().add(lblNewLabel);
+	    getContentPane().add(label_1);
+	    getContentPane().add(label_2);
+	    getContentPane().add(label);
+	    getContentPane().add(scrollPane);
 		
 	   
 		
 		//this.add(table);
 		this.setVisible(true);
-		this.pack();
+		this.setSize(978,495);
+		
+		
 		
 	}
 
