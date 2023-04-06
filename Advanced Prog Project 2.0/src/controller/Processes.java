@@ -114,6 +114,7 @@ public class Processes {
 		
 		
 	}
+	//staff
 	public static void admincreateaccount(Employees employee) { 
 		String Advisor="Advisor";
 		String insertSQL="INSERT INTO projectdb.staff(IdNumber,FirstName,LastName,EmailAddress,category,password)"
@@ -157,7 +158,7 @@ public class Processes {
 		
 		
 	}
-	
+	//student
 	public static Student loginToAccount(String ID,String password) {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.students"
@@ -183,7 +184,7 @@ public class Processes {
 		return null;
 		
 	}
-	
+	//staff
 	public static Employees adminloginToAccount(String staffID,String password) {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.staff"
@@ -211,9 +212,10 @@ public class Processes {
 	}
 	
 	public static void logComplaint(Complaint complaint) {
-		String insertSQL="INSERT INTO projectdb.complain_has_student(StudentId,complain,status)"
+		String FALSE= "FALSE";
+		String insertSQL="INSERT INTO projectdb.complain_has_student(StudentId,complain,status,assigned)"
 		        +"VALUES('"+complaint.getStudentID()+"','"+complaint.getComplaintDescription()+"','"
-				+complaint.getComplaintStatus()+"');";
+				+complaint.getComplaintStatus()+"','"+FALSE+"');";
 		
 		
 		try {
@@ -275,16 +277,16 @@ public class Processes {
 			}
 		}
 	//supervisor
-	public static void adminhistory(Student student) {
+	public static void SupervisorView() {
 		ArrayList<String> idnum1 = new ArrayList<String>();
 		ArrayList<String> complaint2 = new ArrayList<String>();
 		ArrayList<String> complaintdate2 = new ArrayList<String>();
 		ArrayList<String> complaintID2 = new ArrayList<String>();
 		ArrayList<String> complaintstatus2 = new ArrayList<String>();
-
+		String noIdString= "FALSE";
 		String readSQL="SELECT *"
 				      +" FROM projectdb.complain_has_student"
-				      +" WHERE 1";
+				      +" WHERE assigned ='"+noIdString+"';";
 		try {
 			stmt=connection.createStatement();
 			result=stmt.executeQuery(readSQL);
@@ -328,16 +330,22 @@ public class Processes {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.staff"
 				      +" WHERE category='"+Advisor+"';";
+		String tempfn1="";
+		String templn1="";
+		String tempem1="";
+		String tempid1="";
+		String tempcat1="";
 		try {
 			stmt=connection.createStatement();
 			result=stmt.executeQuery(readSQL);
+			
 			while(result.next()) {
 				String id=result.getString("IdNumber");
 				String fn=result.getString("FirstName");
 				String ln=result.getString("LastName");
 				String em=result.getString("EmailAddress");
 				String cat=result.getString("category");
-
+				
 				advisorId1.add(id);
 				fName3.add(fn);
 				lName3.add(ln);
@@ -361,8 +369,9 @@ public class Processes {
 	}
 	//Supervisor
 	public void AssignAdvisor(String stuId, String comId, String staffId){
+		String TRUE ="TRUE";
 		String insertStaff = "UPDATE projectdb.complain_has_student"+" SET `StaffId` ='"
-				+staffId+"'"+" WHERE `StudentId`='"+stuId+"' AND `ComplainId`="+comId+";";
+				+staffId+"',"+"`assigned` = '"+TRUE+"'"+" WHERE `StudentId`='"+stuId+"' AND `ComplainId`="+comId+";";
 		
 		
 		try {
