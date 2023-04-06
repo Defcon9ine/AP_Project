@@ -42,12 +42,22 @@ public class SupervisorDashboard {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 128, 192));
-		panel.setForeground(new Color(0, 128, 255));
+		panel.setForeground(new Color(255, 253, 208));
 		panel.setBounds(0, 0, 215, 769);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Home");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				desktopPane.removeAll();
+				desktopPane.repaint();
+				desktopPane.add(new welcome());
+				
+				
+			}
+		});
 		btnNewButton.setBackground(new Color(128, 255, 255));
 		btnNewButton.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
 		btnNewButton.setBounds(0, 64, 205, 80);
@@ -58,7 +68,7 @@ public class SupervisorDashboard {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new SupervisorLogin();
+				new StaffLogin();
 				frame.dispose();
 				frame.dispose();
 				
@@ -71,7 +81,8 @@ public class SupervisorDashboard {
 		btnNewButton_2.setFont(new Font("Lucida Fax", Font.PLAIN, 15));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				desktopPane.removeAll();
+				desktopPane.repaint();
 desktopPane.add(new supervisorqueries());
 				
 			}
@@ -81,14 +92,15 @@ desktopPane.add(new supervisorqueries());
 		
 		JButton btnNewButton_3 = new JButton("Live Chat");
 		btnNewButton_3.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
-		btnNewButton_3.setBounds(0, 333, 205, 80);
+		btnNewButton_3.setBounds(0, 478, 205, 80);
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("History");
 		btnNewButton_4.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				desktopPane.removeAll();
+				desktopPane.repaint();
 				desktopPane.add(new History());
 			}
 			
@@ -96,7 +108,7 @@ desktopPane.add(new supervisorqueries());
 		
 	
 		
-		btnNewButton_4.setBounds(0, 476, 205, 80);
+		btnNewButton_4.setBounds(0, 330, 205, 80);
 		panel.add(btnNewButton_4);
 		
 
