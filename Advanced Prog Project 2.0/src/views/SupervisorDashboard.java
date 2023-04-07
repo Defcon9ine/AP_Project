@@ -83,7 +83,7 @@ public class SupervisorDashboard {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
 				desktopPane.repaint();
-desktopPane.add(new supervisorqueries());
+
 				
 			}
 		});
