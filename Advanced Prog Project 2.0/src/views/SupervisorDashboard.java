@@ -59,12 +59,12 @@ public class SupervisorDashboard {
 			}
 		});
 		btnNewButton.setBackground(new Color(128, 255, 255));
-		btnNewButton.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
-		btnNewButton.setBounds(0, 64, 205, 80);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnNewButton.setBounds(0, 27, 205, 80);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Log Out");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -74,11 +74,11 @@ public class SupervisorDashboard {
 				
 			}
 		});
-		btnNewButton_1.setBounds(0, 614, 205, 80);
+		btnNewButton_1.setBounds(0, 624, 205, 80);
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Assign Advisors");
-		btnNewButton_2.setFont(new Font("Lucida Fax", Font.PLAIN, 15));
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
@@ -87,16 +87,20 @@ desktopPane.add(new supervisorqueries());
 				
 			}
 		});
-		btnNewButton_2.setBounds(0, 190, 205, 80);
+		btnNewButton_2.setBounds(0, 142, 205, 80);
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Live Chat");
-		btnNewButton_3.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
-		btnNewButton_3.setBounds(0, 478, 205, 80);
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnNewButton_3.setBounds(0, 499, 205, 80);
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("History");
-		btnNewButton_4.setFont(new Font("Lucida Fax", Font.PLAIN, 19));
+		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
@@ -108,10 +112,19 @@ desktopPane.add(new supervisorqueries());
 		
 	
 		
-		btnNewButton_4.setBounds(0, 330, 205, 80);
+		btnNewButton_4.setBounds(0, 256, 205, 80);
 		panel.add(btnNewButton_4);
+		
+		JButton btnAddAdvisor = new JButton("Add Advisor");
+		btnAddAdvisor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAddAdvisor.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnAddAdvisor.setBackground(new Color(128, 255, 255));
+		btnAddAdvisor.setBounds(0, 375, 205, 80);
+		panel.add(btnAddAdvisor);
 		
 
 	}
-
 }
