@@ -158,7 +158,11 @@ public class SignUp implements ActionListener{
 				student.setPassword(password);
 				student.setrePassword(repassword);
 
-
+				ps.IdSearchStudent(idstring);
+				String searchId=ps.getStudent().getID();
+				if (searchId.equals(idstring)==false) {
+					
+				
 				if(password.equals(repassword) &&password.equals("")==false) {
 					new StudentDashboard();
 					frame.dispose();
@@ -168,6 +172,9 @@ public class SignUp implements ActionListener{
 					
 				}else{
 					JOptionPane.showMessageDialog(null,"Your passwords do not match","Sign Up error",JOptionPane.ERROR_MESSAGE);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null,"Account already exist","Sign Up error",JOptionPane.ERROR_MESSAGE);
 				}
 
 
