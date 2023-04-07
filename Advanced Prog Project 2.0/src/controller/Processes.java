@@ -159,6 +159,32 @@ public class Processes {
 		
 	}
 	//student
+	public static Employees welcomeStudent(String ID) {
+		String readSQL="SELECT *"
+				      +" FROM projectdb.students"
+				      +" WHERE idNumber ='"+ID+"';";
+		try {
+			stmt=connection.createStatement();	
+			result=stmt.executeQuery(readSQL);
+			while(result.next()) {
+				String first=result.getString("FirstName");
+				String last=result.getString("LastName");
+				student.setFirstName(first);
+				student.setLastName(last);
+			} 
+
+			
+			
+		}catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		return null;
+		
+	}
+	//student
 	public static Student loginToAccount(String ID,String password) {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.students"
@@ -171,6 +197,32 @@ public class Processes {
 				String passwordString=result.getString("password");
 				student.setID(Id);
 				student.setPassword(passwordString);
+			} 
+
+			welcomeStudent(student.getID());
+			
+		}catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+		}
+		return null;
+		
+	}
+	//staff
+	public static Employees welcome(String ID) {
+		String readSQL="SELECT *"
+				      +" FROM projectdb.staff"
+				      +" WHERE idNumber ='"+ID+"';";
+		try {
+			stmt=connection.createStatement();	
+			result=stmt.executeQuery(readSQL);
+			while(result.next()) {
+				String first=result.getString("FirstName");
+				String last=result.getString("LastName");
+				employees.setFirstName(first);
+				employees.setLastName(last);
 			} 
 
 			
@@ -200,7 +252,7 @@ public class Processes {
 				employees.setPassword(passwordString);
 				employees.setCategory(category);
 			} 
-			
+			welcome(employees.getStaffID());
 		}catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
 		}
