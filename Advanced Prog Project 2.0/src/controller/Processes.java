@@ -159,7 +159,7 @@ public class Processes {
 		
 	}
 	//student
-	public static Employees welcomeStudent(String ID) {
+	public static Student welcomeStudent(String ID) {
 		String readSQL="SELECT *"
 				      +" FROM projectdb.students"
 				      +" WHERE idNumber ='"+ID+"';";
@@ -210,6 +210,28 @@ public class Processes {
 		return null;
 		
 	}
+	//student
+		public static Student IdSearchStudent(String ID) {
+			String readSQL="SELECT *"
+					      +" FROM projectdb.students"
+					      +" WHERE idNumber ='"+ID+"';";
+			try {
+				stmt=connection.createStatement();	
+				result=stmt.executeQuery(readSQL);
+				while(result.next()) {
+					String id=result.getString("IdNumber");
+					student.setID(id);
+				} 
+	
+			}catch(SQLException e) {
+				JOptionPane.showMessageDialog(null,"You encountered an SQL error","Error status",JOptionPane.ERROR_MESSAGE);
+			}
+			catch(Exception e) {
+				JOptionPane.showMessageDialog(null,"You encountered an error","Error status",JOptionPane.ERROR_MESSAGE);
+			}
+			return null;
+			
+		}
 	//staff
 	public static Employees welcome(String ID) {
 		String readSQL="SELECT *"
