@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +15,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 
-import com.mysql.cj.x.protobuf.MysqlxExpr.Identifier;
 
 import controller.Processes;
 import models.Complaint;
@@ -115,6 +116,26 @@ public class Complaints extends JInternalFrame{
 		chckbox9.setBounds(496, 229, 328, 21);
 		this.getContentPane().add(chckbox9);
 		
+	
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(103, 311, 581, 82);
+		getContentPane().add(textArea);
+		textArea.setVisible(false);
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("My problem isnt listed here");
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textArea.setVisible(true);
+				
+				}
+		});
+		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnNewRadioButton.setBounds(270, 284, 248, 21);
+		getContentPane().add(rdbtnNewRadioButton);
+		
+		//JTextArea textArea = new JTextArea();
+	
+		
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -138,34 +159,32 @@ public class Complaints extends JInternalFrame{
 		               selected= String.valueOf(chckbox8.getText());
 		          }else if ((chckbox9.isSelected())) {
 		               selected= String.valueOf(chckbox9.getText());
+		          }else if((rdbtnNewRadioButton.isSelected())) {
+		               selected=textArea.getText().toString();
+		               if(selected.equals("")) {
+		            	   
+		               }else {
+						textArea.setText(null);
+					}
 		          }
 				  Processes process=new Processes();
 		          Complaint complaint=new Complaint();
-		          complaint.setComplaintDescription(String.valueOf(selected));
-		          complaint.setComplaintStatus("Unresolved");
-		          complaint.setStudentID(process.getStudent().getID());
-		          process.logComplaint(complaint);
+		          if(selected.equals("")) {
+		        	  JOptionPane.showMessageDialog(null,"You haven't Enter Anything in the text field",
+		        			  "Submit Status",JOptionPane.ERROR_MESSAGE);
+	               }else {
+	            	  complaint.setComplaintDescription(String.valueOf(selected));
+	 		          complaint.setComplaintStatus("UNRESOLVED");
+	 		          complaint.setStudentID(process.getStudent().getID());
+	 		          process.logComplaint(complaint);
+	 		          textArea.setText(null);
+				}          
 			}
 		});
 		submitButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		submitButton.setBounds(304, 431, 165, 38);
 		this.getContentPane().add(submitButton);
 		this.setVisible(true);
-
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("My problem isnt listed here");
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JTextArea textArea = new JTextArea();
-				textArea.setBounds(250, 400, 10, 2);
-				
-				textArea.setVisible(true);
-				getContentPane().add(textArea);
-				}
-		});
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		rdbtnNewRadioButton.setBounds(270, 284, 248, 21);
-		getContentPane().add(rdbtnNewRadioButton);
-		
 		          
 		
 		ButtonGroup buttonGroup=new ButtonGroup();
@@ -181,9 +200,7 @@ public class Complaints extends JInternalFrame{
 		buttonGroup.add(chckbox9);
 		buttonGroup.add(rdbtnNewRadioButton);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(103, 311, 581, 82);
-		getContentPane().add(textArea);
+		
 		
 	
 	
